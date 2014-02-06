@@ -1,0 +1,22 @@
+[statsite]
+tcp_port = <%= @tcp_port %>
+udp_port = <%= @udp_port %>
+bind_address = <%= @bind_address %>
+parse_stdin = <%= @parse_stdin %>
+log_level = <%= @log_level.upcase %>
+flush_interval = <%= @flush_interval %>
+timer_eps = <%= @timer_eps %>
+set_eps = <%= @set_eps %>
+stream_cmd = <%= @stream_cmd %>
+input_counter = <%= @input_counter %>
+pid_file = <%= @pid_file %>
+binary_stream = <%= @binary_stream %>
+
+<% @histograms.each do |histogram| %>
+[histogram_<%= histogram['name'] %>]
+prefix = <%= histogram['prefix'] %>
+min = <%= histogram['min'] %>
+max = <%= histogram['max'] %>
+width = <%= histogram['width'] %>
+
+<% end %>
