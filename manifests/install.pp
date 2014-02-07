@@ -14,7 +14,7 @@ class statsite::install inherits statsite {
   file { $statsite::install_path:
     ensure => directory,
   } ->
-  exec { 'statsite::install:download':
+  exec { 'statsite::install::download':
     command => "curl -LO https://github.com/armon/statsite/archive/${package}",
     unless  => "test -d ${version_path}",
     creates => "${statsite::install_path}/${package}",

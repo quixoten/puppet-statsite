@@ -107,6 +107,10 @@ class statsite (
   $histograms     = [],
 ) {
 
+  if $::osfamily != 'Debian' {
+    fail("The ${::osfamily} is not currently supported.")
+  }
+
   $config_file = "${config_path}/config"
 
   include statsite::install
@@ -117,5 +121,4 @@ class statsite (
   Class['::statsite::config'] ~>
   Class['::statsite::service'] ->
   Class['::statsite']
-
 }
