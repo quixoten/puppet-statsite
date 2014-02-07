@@ -8,4 +8,4 @@ description 'Statsite installation and configuration'
 project_page 'https://github.com/devin-c/puppet-statsite'
 
 ## Add dependencies, if any:
-dependency 'puppetlabs/stdlib', '>= 3.0.0'
+dependency 'puppetlabs/stdlib', '>= 0.1.6'

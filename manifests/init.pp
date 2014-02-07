@@ -11,9 +11,8 @@
 # [*install_path*]
 #   The path that statsite will be installed. Defaults to /opt/statsite
 #
-# [*config_file*]
-#   The location the generated config file will be placed. Defaults to
-#   /etc/statsite/config
+# [*config_path*]
+#   Statsite's configuration directory. Defaults to /etc/statsite
 #
 # [*tcp_port*]
 #   Integer, sets the TCP port to listen on. Default 8125. 0 to disable.
@@ -92,7 +91,7 @@
 class statsite (
   $version        = '0.6.0',
   $install_path   = '/opt/statsite',
-  $config_file    = '/etc/statsite/config',
+  $config_path    = '/etc/statsite',
   $tcp_port       = 8125,
   $udp_port       = 8125,
   $bind_address   = '0.0.0.0',
@@ -101,18 +100,22 @@ class statsite (
   $flush_interval = 10,
   $timer_eps      = 0.01,
   $set_eps        = 0.02,
-  $stream_cmd     = "python $install_path/sinks/graphite.py localhost 2003",
+  $stream_cmd     = 'python /opt/statsite/current/sinks/graphite.py',
   $input_counter  = undef,
   $pid_file       = '/var/run/statsite.pid',
   $binary_stream  = 0,
   $histograms     = [],
 ) {
+
+  $config_file = "${config_path}/config"
+
   include statsite::install
   include statsite::config
   include statsite::service
 
-  Cass['::statsite::install'] ->
-  Cass['::statsite::config'] ~>
-  Cass['::statsite::service'] ->
+  Class['::statsite::install'] ->
+  Class['::statsite::config'] ~>
+  Class['::statsite::service'] ->
   Class['::statsite']
+
 }

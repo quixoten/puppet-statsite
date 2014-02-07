@@ -14,5 +14,5 @@ respawn limit 5 30
 console none
 
 script
-  exec <%= @install_path %>/statsite -f <%= @config_file %> 2>/dev/null
+  exec <%= @install_path %>/current/statsite -f <%= @config_file %> 2>/dev/null
 end script

@@ -8,15 +8,16 @@ flush_interval = <%= @flush_interval %>
 timer_eps = <%= @timer_eps %>
 set_eps = <%= @set_eps %>
 stream_cmd = <%= @stream_cmd %>
+<%- if @input_counter -%>
 input_counter = <%= @input_counter %>
+<%- end -%>
 pid_file = <%= @pid_file %>
 binary_stream = <%= @binary_stream %>
+<%- @histograms.each do |histogram| -%>
 
-<% @histograms.each do |histogram| %>
 [histogram_<%= histogram['name'] %>]
 prefix = <%= histogram['prefix'] %>
 min = <%= histogram['min'] %>
 max = <%= histogram['max'] %>
 width = <%= histogram['width'] %>
-
-<% end %>
+<%- end -%>
