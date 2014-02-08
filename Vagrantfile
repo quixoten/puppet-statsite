@@ -14,9 +14,14 @@ initialize = <<-SCRIPT
   apt-key adv --keyserver keyserver.ubuntu.com --recv 4BD6EC30
   apt-get update
   apt-get -y install puppet
-  puppet apply \
-    --modulepath /vagrant/spec/fixtures/modules \
-    --execute "class { 'statsite': graphite_host => po-sand-stats1 }"
+
+  mkdir -p /etc/puppet/modules
+  cd /etc/puppet/modules
+  ln -s /vagrant statsite
+
+  puppet module install --target-dir=/etc/puppet/modules puppetlabs/stdlib
+
+  puppet apply --execute "class { 'statsite': graphite_host => po-sand-stats1 }"
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant|
