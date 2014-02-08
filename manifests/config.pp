@@ -11,11 +11,22 @@ class statsite::config inherits statsite {
   $flush_interval = $statsite::flush_interval
   $timer_eps      = $statsite::timer_eps
   $set_eps        = $statsite::set_eps
-  $stream_cmd     = $statsite::stream_cmd
   $input_counter  = $statsite::input_counter
   $pid_file       = $statsite::pid_file
   $binary_stream  = $statsite::binary_stream
   $histograms     = $statsite::histograms
+
+  if $statsite::stream_cmd {
+    $stream_cmd = $statsite::stream_cmd
+  } else {
+    $stream_cmd = join([
+      "python '${statsite::install_path}/current/sinks/graphite.py'",
+      "'${statsite::graphite_host}'",
+      $statsite::graphite_port,
+      "'${statsite::graphite_prefix}'",
+      $statsite::graphite_attempts
+    ], ' ')
+  }
 
   file { $statsite::config_path:
     ensure => directory,

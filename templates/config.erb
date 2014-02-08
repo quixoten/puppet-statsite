@@ -7,7 +7,11 @@ log_level = <%= @log_level.upcase %>
 flush_interval = <%= @flush_interval %>
 timer_eps = <%= @timer_eps %>
 set_eps = <%= @set_eps %>
+<%- if @stream_cmd -%>
 stream_cmd = <%= @stream_cmd %>
+<%- else -%>
+stream_cmd <%= @install_path %>/current/sinks/graphite.py <%= @graphite_host %> <%= @graphite_port %> '<%= @graphite_prefix %>' <%= @graphite_attempts %>
+<%- end -%>
 <%- if @input_counter -%>
 input_counter = <%= @input_counter %>
 <%- end -%>

@@ -16,7 +16,7 @@ initialize = <<-SCRIPT
   apt-get -y install puppet
   puppet apply \
     --modulepath /vagrant/spec/fixtures/modules \
-    /vagrant/spec/fixtures/manifests/default.pp
+    --execute "class { 'statsite': graphite_host => po-sand-stats1 }"
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant|

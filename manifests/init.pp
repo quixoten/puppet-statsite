@@ -46,8 +46,25 @@
 # [*stream_cmd*]
 #   This is the command that statsite invokes every flush_interval seconds
 #   to handle the metrics. It can be any executable. It should read inputs
-#   over stdin and exit with status code 0 on success. It defaults to the
-#   graphite sink directed to localhost on port 2003
+#   over stdin and exit with status code 0 on success. If this parameter
+#   is defined, all graphite_* parameters will be ignored.
+#
+# [*graphite_host*]
+#   The hostname of the graphite server to sink metrics to every
+#   flush_interval seconds. Defaults to "localhost". This parameter will
+#   be ignored if stream_cmd is set.
+#
+# [*graphite_port*]
+#   The port of the graphite server. Defaults to 2003. This parameter
+#   will be ignored if stream_cmd is set.
+#
+# [*graphite_prefix*]
+#   A prefix to add to the keys sent to graphite. Defaults to "statsite".
+#   This parameter will be ignored if stream_cmd is set.
+#
+# [*graphite_attempts*]
+#   The number of re-connect attempts before failing. Defaults to 3. This
+#   parameter will be ignored if stream_cmd is set.
 #
 # [*input_counter*]
 #   If set, statsite will count how many commands it received in the flush
@@ -89,22 +106,26 @@
 #   Each histogram must specify all keys to be valid
 
 class statsite (
-  $version        = '0.6.0',
-  $install_path   = '/opt/statsite',
-  $config_path    = '/etc/statsite',
-  $tcp_port       = 8125,
-  $udp_port       = 8125,
-  $bind_address   = '0.0.0.0',
-  $parse_stdin    = 0,
-  $log_level      = 'debug',
-  $flush_interval = 10,
-  $timer_eps      = 0.01,
-  $set_eps        = 0.02,
-  $stream_cmd     = 'python /opt/statsite/current/sinks/graphite.py',
-  $input_counter  = undef,
-  $pid_file       = '/var/run/statsite.pid',
-  $binary_stream  = 0,
-  $histograms     = [],
+  $version           = '0.6.0',
+  $install_path      = '/opt/statsite',
+  $config_path       = '/etc/statsite',
+  $tcp_port          = 8125,
+  $udp_port          = 8125,
+  $bind_address      = '0.0.0.0',
+  $parse_stdin       = 0,
+  $log_level         = 'debug',
+  $flush_interval    = 10,
+  $timer_eps         = 0.01,
+  $set_eps           = 0.02,
+  $stream_cmd        = undef,
+  $graphite_host     = 'localhost',
+  $graphite_port     = 2003,
+  $graphite_prefix   = 'statsite',
+  $graphite_attempts = 3,
+  $input_counter     = undef,
+  $pid_file          = '/var/run/statsite.pid',
+  $binary_stream     = 0,
+  $histograms        = [],
 ) {
 
   if $::osfamily != 'Debian' {
