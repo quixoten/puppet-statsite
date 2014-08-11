@@ -4,7 +4,7 @@ class statsite::install inherits statsite {
   $package      = "v${statsite::version}.tar.gz"
   $version_path = "${statsite::install_path}/statsite-${statsite::version}"
 
-  ensure_packages(['scons', 'build-essential'])
+  ensure_packages($packages)
 
   Exec {
     cwd  => $statsite::install_path,

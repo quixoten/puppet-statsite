@@ -111,3 +111,9 @@ class { 'statsite':
     Floating value. The width of each bucket between the min and max.
 
   Each histogram must specify all keys to be valid
+
+## Supported Platforms
+- Debian / Ubuntu (upstart)
+- Fedora / Centos 7 / Redhat 7 (systemd)
+
+

@@ -2,6 +2,6 @@
 class statsite::service inherits statsite {
   service { 'statsite':
     ensure   => running,
-    provider => 'upstart',
+    provider => $init_style,
   }
 }

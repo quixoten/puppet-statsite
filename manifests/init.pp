@@ -126,11 +126,9 @@ class statsite (
   $pid_file          = '/var/run/statsite.pid',
   $binary_stream     = 0,
   $histograms        = [],
-) {
-
-  if $::osfamily != 'Debian' {
-    fail("The ${::osfamily} is not currently supported.")
-  }
+  $packages          = $statsite::params::packages,
+  $init_style        = $statsite::params::init_style
+) inherits statsite::params {
 
   $config_file = "${config_path}/config"
 
