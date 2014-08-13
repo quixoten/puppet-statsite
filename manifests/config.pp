@@ -37,8 +37,14 @@ class statsite::config inherits statsite {
     content => template('statsite/config.erb'),
   }
 
-  file { '/etc/init/statsite.conf':
-    ensure  => present,
-    content => template('statsite/upstart.erb'),
+  $start_file = $init_style ? {
+    'upstart' => '/etc/init/statsite.conf',
+    'systemd' => '/lib/systemd/system/statsite.service',
   }
+
+  file { $start_file:
+    ensure  => present,
+    content => template("statsite/${init_style}.erb"),
+  }
+
 }
