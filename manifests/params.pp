@@ -3,6 +3,10 @@ class statsite::params {
   case $::osfamily {
     'Debian' : {
       $packages   = ['scons', 'build-essential']
+      $init_style = 'debian'
+    }
+    'Ubuntu' : {
+      $packages   = ['scons', 'build-essential']
       $init_style = 'upstart'
     }
     'RedHat': {

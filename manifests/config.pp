@@ -38,6 +38,7 @@ class statsite::config inherits statsite {
   }
 
   $start_file = $init_style ? {
+    'debian'  => '/etc/init.d/statsite',
     'upstart' => '/etc/init/statsite.conf',
     'systemd' => '/lib/systemd/system/statsite.service',
   }
@@ -45,6 +46,7 @@ class statsite::config inherits statsite {
   file { $start_file:
     ensure  => present,
     content => template("statsite/${init_style}.erb"),
+    mode    => 0755,
   }
 
 }
