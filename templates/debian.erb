@@ -20,7 +20,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="statsite"
 NAME=statsite
 DAEMON=<%= @install_path %>/current/statsite
-DAEMON_ARGS="<%= @config_file %>"
+DAEMON_ARGS=-f "<%= @config_file %>"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
 DAEMON_USER=www-data
