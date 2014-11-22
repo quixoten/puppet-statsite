@@ -1,0 +1,14 @@
+{
+  "name": "dchristensen-statsite",
+  "version": "0.2.0",
+  "author": "Devin Christensen",
+  "summary": "Statsite installation and configuration",
+  "license": "The MIT License (MIT)",
+  "source": "https://github.com/devin-c/puppet-statsite.git",
+  "project_page": "https://github.com/devin-c/puppet-statsite",
+  "issues_url": "https://github.com/devin-c/puppet-statsite/issues",
+  "description": "Statsite installation and configuration",
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">= 0.1.6"}
+  ]
+}
