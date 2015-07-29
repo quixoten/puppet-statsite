@@ -27,6 +27,7 @@ class statsite::install inherits statsite {
     cwd     => $version_path,
     command => 'make',
     creates => "${version_path}/statsite",
+    require => Package[$packages],
   }
 
   file { "${statsite::install_path}/current":
