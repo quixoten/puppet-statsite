@@ -17,6 +17,7 @@ input_counter = <%= @input_counter %>
 <%- end -%>
 pid_file = <%= @pid_file %>
 binary_stream = <%= @binary_stream %>
+use_type_prefix = <%= @use_type_prefix %>
 <%- @histograms.each do |histogram| -%>
 
 [histogram_<%= histogram['name'] %>]

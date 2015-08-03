@@ -80,6 +80,10 @@
 #   Should data be streamed to the stream_cmd in binary form instead of
 #   ASCI form. Defaults to 0.
 #
+# [*use_type_prefix*]
+#   Should prefixes with message type be added to the messages. Does not
+#   affect global_prefix. Defaults to 1.
+#
 # [*histograms*]
 #   An optional array of histogram configuration hashes with the following
 #   keys:
@@ -125,6 +129,7 @@ class statsite (
   $input_counter     = undef,
   $pid_file          = '/var/run/statsite.pid',
   $binary_stream     = 0,
+  $use_type_prefix   = 1,
   $histograms        = [],
   $packages          = $statsite::params::packages,
   $init_style        = $statsite::params::init_style
