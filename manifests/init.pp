@@ -59,8 +59,9 @@
 #   will be ignored if stream_cmd is set.
 #
 # [*graphite_prefix*]
-#   A prefix to add to the keys sent to graphite. Defaults to "statsite".
-#   This parameter will be ignored if stream_cmd is set.
+#   A prefix to add to the keys sent to graphite. Defaults to "statsite.".
+#   Note: The trailing dot is necessary. This parameter will be ignored if
+#   stream_cmd is set.
 #
 # [*graphite_attempts*]
 #   The number of re-connect attempts before failing. Defaults to 3. This
@@ -120,7 +121,7 @@ class statsite (
   $stream_cmd        = undef,
   $graphite_host     = 'localhost',
   $graphite_port     = 2003,
-  $graphite_prefix   = 'statsite',
+  $graphite_prefix   = 'statsite.',
   $graphite_attempts = 3,
   $input_counter     = undef,
   $pid_file          = '/var/run/statsite.pid',
