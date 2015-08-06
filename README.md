@@ -91,6 +91,12 @@ class { 'statsite':
   Should prefixes with message type be added to the messages. Does not
   affect global_prefix. Defaults to 1.
 
+- `extended_counters`
+  If enabled, the counter output is extended to include all the computed
+  summary values. Otherwise, the counter is emitted as just the sum value.
+  Summary values include mean, stdev, sum, sum_sq, lower, upper, and rate.
+  Defaults to false.
+
 - `histograms`
   An optional array of histogram configuration hashes with the following
   keys:
