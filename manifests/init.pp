@@ -117,7 +117,7 @@
 #   Each histogram must specify all keys to be valid
 
 class statsite (
-  $version           = '0.6.0',
+  $version           = '0.7.1',
   $install_path      = '/opt/statsite',
   $config_path       = '/etc/statsite',
   $tcp_port          = 8125,
