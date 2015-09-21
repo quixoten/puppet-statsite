@@ -30,13 +30,13 @@ class statsite::config inherits statsite {
 
   file { $statsite::config_path:
     ensure => directory,
-    mode    => 0644,
+    mode    => '0644',
   }
 
   file { $statsite::config_file:
     ensure  => present,
     content => template('statsite/config.erb'),
-    mode    => 0644,
+    mode    => '0644',
   }
 
   $start_file = $init_style ? {
@@ -48,7 +48,7 @@ class statsite::config inherits statsite {
   file { $start_file:
     ensure  => present,
     content => template("statsite/${init_style}.erb"),
-    mode    => 0755,
+    mode    => '0755',
   }
 
 }
