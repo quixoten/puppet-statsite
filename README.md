@@ -20,6 +20,26 @@ class { 'statsite':
 - `config_path`
   Statsite's configuration directory. Defaults to /etc/statsite
 
+- `user`
+  The user to run the statsite process as. Default depends on distro.
+
+- `group`
+  The group to run the statsite process as. Default depends on distro.
+
+- `manage_user`
+  Manage the "user". Defaults to false.
+
+- `manage_group`
+  Manage the "group". Defaults to false.
+
+- `user_ensure`
+  When "manage_user" is set to true, the value of the ensure parameter
+  on the user resource. Default is "present".
+
+- `group_ensure`
+  When "manage_group" is set to true, the value of the ensure parameter
+  on the group resource. Default is "present".
+
 - `tcp_port`
   Integer, sets the TCP port to listen on. Default 8125. 0 to disable.
 
@@ -79,6 +99,9 @@ class { 'statsite':
   if set to "numStats", then statsite will emit "counter.numStats" with
   the number of samples it has received.
 
+- `daemonize`
+  Should statsite daemonize. Defaults to 0.
+
 - `pid_file`
   When daemonizing, where to put the pid file. Defaults to
   /var/run/statsite.pid
@@ -124,7 +147,8 @@ class { 'statsite':
   Each histogram must specify all keys to be valid
 
 ## Supported Platforms
-- Debian / Ubuntu (upstart)
+- Debian (sysvinit)
+- Ubuntu (upstart)
 - Fedora / Centos 7 / Redhat 7 (systemd)
 
 

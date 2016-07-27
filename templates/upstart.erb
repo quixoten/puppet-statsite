@@ -13,6 +13,7 @@ respawn limit 5 30
 
 console none
 
-script
-  exec <%= @install_path %>/current/statsite -f <%= @config_file %> 2>/dev/null
-end script
+setuid <%= @user %>
+setgid <%= @group %>
+
+exec <%= @install_path %>/current/statsite -f <%= @config_file %> 2>/dev/null

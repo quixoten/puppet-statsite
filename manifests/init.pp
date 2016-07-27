@@ -14,6 +14,26 @@
 # [*config_path*]
 #   Statsite's configuration directory. Defaults to /etc/statsite
 #
+# [*user*]
+#   The user to run the statsite process as. Default depends on distro.
+#
+# [*group*]
+#   The group to run the statsite process as. Default depends on distro.
+#
+# [*manage_user*]
+#   Manage the "user". Defaults to false.
+#
+# [*manage_group*]
+#   Manage the "group". Defaults to false.
+#
+# [*user_ensure*]
+#   When "manage_user" is set to true, the value of the ensure parameter
+#   on the user resource. Default is "present".
+#
+# [*group_ensure*]
+#   When "manage_group" is set to true, the value of the ensure parameter
+#   on the group resource. Default is "present".
+#
 # [*tcp_port*]
 #   Integer, sets the TCP port to listen on. Default 8125. 0 to disable.
 #
@@ -73,6 +93,9 @@
 #   if set to "numStats", then statsite will emit "counter.numStats" with
 #   the number of samples it has received.
 #
+# [*daemonize*]
+#   Should statsite daemonize. Defaults to 0.
+#
 # [*pid_file*]
 #   When daemonizing, where to put the pid file. Defaults to
 #   /var/run/statsite.pid
@@ -120,6 +143,12 @@ class statsite (
   $version           = '0.6.0',
   $install_path      = '/opt/statsite',
   $config_path       = '/etc/statsite',
+  $user              = $statsite::params::user,
+  $group             = $statsite::params::group,
+  $manage_user       = false,
+  $manage_group      = false,
+  $user_ensure       = 'present',
+  $group_ensure      = 'present',
   $tcp_port          = 8125,
   $udp_port          = 8125,
   $bind_address      = '0.0.0.0',
@@ -134,6 +163,7 @@ class statsite (
   $graphite_prefix   = 'statsite.',
   $graphite_attempts = 3,
   $input_counter     = undef,
+  $daemonize         = 0,
   $pid_file          = '/var/run/statsite.pid',
   $binary_stream     = 0,
   $use_type_prefix   = 1,

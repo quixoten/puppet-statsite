@@ -4,10 +4,14 @@ class statsite::params {
     'Debian' : {
       $packages   = ['scons', 'build-essential']
       $init_style = 'debian'
+      $user       = 'www-data'
+      $group      = 'www-data'
     }
     'Ubuntu' : {
       $packages   = ['scons', 'build-essential']
       $init_style = 'upstart'
+      $user       = 'root'
+      $group      = 'root'
     }
     'RedHat': {
       $packages   = ['scons', 'make', 'gcc-c++']
@@ -15,9 +19,11 @@ class statsite::params {
           and versioncmp($::operatingsystemrelease, '7') >= 0)
         or ($::operatingsystem == 'Fedora'
           and versioncmp($::operatingsystemrelease, '15') >= 0) {
-          $init_style = 'systemd'
-      }
-      else {
+
+        $init_style = 'systemd'
+        $user       = 'root'
+        $group      = 'root'
+      } else {
         fail("${::osfamily} ${::operatingsystemrelease} is not currently supported.")
       }
     }
