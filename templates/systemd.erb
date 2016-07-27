@@ -9,6 +9,7 @@ ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
 Restart=on-failure
 RestartSec=42s
+User=statsite
 
 [Install]
 WantedBy=multi-user.target

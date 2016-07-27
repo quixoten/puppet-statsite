@@ -16,6 +16,15 @@ class statsite::config inherits statsite {
   $binary_stream  = $statsite::binary_stream
   $histograms     = $statsite::histograms
 
+  group { 'statsite':
+    ensure  => 'present',
+  }
+  user { 'statsite':
+    ensure  => 'present',
+    groups  => 'statsite',
+    require => Group['statsite'],
+  }
+
   if $statsite::stream_cmd {
     $stream_cmd = $statsite::stream_cmd
   } else {
