@@ -7,12 +7,6 @@ class statsite::params {
       $user       = 'www-data'
       $group      = 'www-data'
     }
-    'Ubuntu' : {
-      $packages   = ['scons', 'build-essential']
-      $init_style = 'upstart'
-      $user       = 'root'
-      $group      = 'root'
-    }
     'RedHat': {
       $packages   = ['scons', 'make', 'gcc-c++']
       if ($::operatingsystem != 'Fedora'
