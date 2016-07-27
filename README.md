@@ -21,10 +21,10 @@ class { 'statsite':
   Statsite's configuration directory. Defaults to /etc/statsite
 
 - `user`
-  The user to run the statsite process as. Default depends on distro.
+  The user to run the statsite process as. Default depends on osfamily.
 
 - `group`
-  The group to run the statsite process as. Default depends on distro.
+  The group to run the statsite process as. Default depends on osfamily.
 
 - `manage_user`
   Manage the "user". Defaults to false.
