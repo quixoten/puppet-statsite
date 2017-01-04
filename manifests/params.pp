@@ -7,7 +7,12 @@ class statsite::params {
     }
     'Ubuntu' : {
       $packages   = ['scons', 'build-essential']
+      if versioncmp($::operatingsystemrelease, '15.04') >= 0 {
+      $init_style = 'systemd'
+      }
+      else {
       $init_style = 'upstart'
+      }
     }
     'RedHat': {
       $packages   = ['scons', 'make', 'gcc-c++']
