@@ -5,27 +5,28 @@ class statsite::params {
       $packages   = ['scons', 'build-essential']
       $init_style = 'debian'
     }
+
     'Ubuntu' : {
       $packages   = ['scons', 'build-essential']
+
       if versioncmp($::operatingsystemrelease, '15.04') >= 0 {
-      $init_style = 'systemd'
-      }
-      else {
-      $init_style = 'upstart'
+        $init_style = 'systemd'
+      } else {
+       $init_style = 'upstart'
       }
     }
+
     'RedHat': {
       $packages   = ['scons', 'make', 'gcc-c++']
-      if ($::operatingsystem != 'Fedora'
-          and versioncmp($::operatingsystemrelease, '7') >= 0)
-        or ($::operatingsystem == 'Fedora'
-          and versioncmp($::operatingsystemrelease, '15') >= 0) {
+      if    ($::operatingsystem != 'Fedora' and versioncmp($::operatingsystemrelease, '7') >= 0)
+         or ($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '15') >= 0)
+      {
           $init_style = 'systemd'
-      }
-      else {
+      } else {
         fail("${::osfamily} ${::operatingsystemrelease} is not currently supported.")
       }
     }
+
     default: {
       fail("${::osfamily} is not currently supported.")
     }
