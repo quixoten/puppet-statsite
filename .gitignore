@@ -2,4 +2,3 @@ pkg
 Gemfile.lock
 spec/fixtures/
 *.swp
-.remote-sync.json
