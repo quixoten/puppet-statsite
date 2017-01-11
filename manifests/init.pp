@@ -141,8 +141,8 @@ class statsite (
   $histograms        = [],
   $packages          = $statsite::params::packages,
   $init_style        = $statsite::params::init_style,
+  $proxy             = undef,
 ) inherits statsite::params {
-
   $config_file = "${config_path}/config"
 
   include statsite::install
