@@ -5,7 +5,12 @@ class statsite::install inherits statsite {
   $version_path = "${statsite::install_path}/statsite-${statsite::version}"
 
   ensure_packages($packages)
-
+  if ($proxy) {
+    $install_options = "--proxy ${proxy}"
+    }else {
+    $install_options = undef
+    }
+  $curl_command = "curl -LO ${install_options} https://github.com/armon/statsite/archive/${package}"
   Exec {
     cwd  => $statsite::install_path,
     path => ['/usr/bin', '/bin'],
@@ -15,7 +20,7 @@ class statsite::install inherits statsite {
     ensure => directory,
   } ->
   exec { 'statsite::install::download':
-    command => "curl -LO https://github.com/armon/statsite/archive/${package}",
+    command => $curl_command,
     unless  => "test -d ${version_path}",
     creates => "${statsite::install_path}/${package}",
   } ~>
