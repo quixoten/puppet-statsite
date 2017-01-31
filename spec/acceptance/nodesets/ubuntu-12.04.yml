@@ -1,0 +1,7 @@
+HOSTS:
+  ubuntu-12.04:
+    roles:
+      - agent
+    platform: ubuntu-12.04-amd64
+    box: bento/ubuntu-12.04
+    hypervisor: vagrant

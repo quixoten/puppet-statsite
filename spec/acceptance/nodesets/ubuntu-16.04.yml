@@ -1,0 +1,7 @@
+HOSTS:
+  ubuntu-16.04:
+    roles:
+      - agent
+    platform: ubuntu-16.04-amd64
+    box: bento/ubuntu-16.04
+    hypervisor: vagrant

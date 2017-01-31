@@ -1,0 +1,8 @@
+HOSTS:
+  centos-6.7:
+    roles:
+      - agent
+    platform: el-6-x86_64
+    box: bento/centos-6.7
+    hypervisor: vagrant
+

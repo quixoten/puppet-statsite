@@ -6,8 +6,8 @@ require "beaker/module_install_helper"
 install_puppet_agent_on(hosts, options)
 
 # Install module on all hosts
-install_module_on(hosts)
 install_module_dependencies_on(hosts)
+install_module_on(hosts)
 
 RSpec.configure do |c|
   module_root = File.expand_path("#{__FILE__}/../..")

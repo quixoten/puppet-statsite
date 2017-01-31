@@ -1,0 +1,7 @@
+HOSTS:
+  debian-7.11:
+    roles:
+      - agent
+    platform: debian-7-amd64
+    box: bento/debian-7.11
+    hypervisor: vagrant

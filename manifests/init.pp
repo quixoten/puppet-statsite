@@ -14,6 +14,15 @@
 # [*config_path*]
 #   Statsite's configuration directory. Defaults to /etc/statsite
 #
+# [*service_ensure*]
+#   Defaults to running
+#
+# [*service_enable*]
+#   Defaults to true
+#
+# [*config_path*]
+#   Statsite's configuration directory. Defaults to /etc/statsite
+#
 # [*user*]
 #   The user to run the statsite process as. Default depends on osfamily.
 #
@@ -143,6 +152,8 @@ class statsite (
   $version           = '0.6.0',
   $install_path      = '/opt/statsite',
   $config_path       = '/etc/statsite',
+  $service_ensure    = 'running',
+  $service_enable    = true,
   $user              = $statsite::params::user,
   $group             = $statsite::params::group,
   $manage_user       = false,
@@ -163,14 +174,17 @@ class statsite (
   $graphite_prefix   = 'statsite.',
   $graphite_attempts = 3,
   $input_counter     = undef,
-  $daemonize         = 0,
-  $pid_file          = '/var/run/statsite.pid',
+  $daemonize         = $statsite::params::daemonize,
+  $pid_file          = $statsite::params::pid_file,
   $binary_stream     = 0,
   $use_type_prefix   = 1,
   $extended_counters = 0,
   $histograms        = [],
   $packages          = $statsite::params::packages,
-  $init_style        = $statsite::params::init_style,
+  $init_template     = $statsite::params::init_template,
+  $init_file         = $statsite::params::init_file,
+  $init_content      = undef,
+  $init_source       = undef,
   $install_proxy     = undef,
 ) inherits statsite::params {
   $config_file = "${config_path}/config"

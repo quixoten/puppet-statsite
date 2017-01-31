@@ -59,15 +59,23 @@ class statsite::config {
     mode    => '0644',
   }
 
-  $start_file = $statsite::init_style ? {
-    'debian'  => '/etc/init.d/statsite',
-    'upstart' => '/etc/init/statsite.conf',
-    'systemd' => '/lib/systemd/system/statsite.service',
+  if $statsite::init_source {
+    $init_source  = $statsite::init_source
+    $init_content = undef
+  } elsif $statsite::init_content {
+    $init_source  = undef
+    $init_content = $statsite::init_content
+  } elsif $statsite::init_template {
+    $init_source  = undef
+    $init_content = template($statsite::init_template)
+  } else {
+    fail('One of init_source, init_content, or init_template must be defined.')
   }
 
-  file { $start_file:
+  file { $statsite::init_file:
     ensure  => present,
-    content => template("statsite/${statsite::init_style}.erb"),
+    source  => $init_source,
+    content => $init_content,
     mode    => '0755',
   }
 

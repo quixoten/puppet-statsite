@@ -1,0 +1,7 @@
+HOSTS:
+  debian-8.6:
+    roles:
+      - agent
+    platform: debian-8-amd64
+    box: bento/debian-8.6
+    hypervisor: vagrant

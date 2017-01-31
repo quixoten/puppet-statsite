@@ -16,4 +16,9 @@ describe "statsite" do
     it { should be_listening.with("tcp") }
     it { should be_listening.with("udp") }
   end
+
+  describe service("statsite") do
+    it { should be_enabled }
+    it { should be_running }
+  end
 end

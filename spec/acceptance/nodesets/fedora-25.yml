@@ -1,0 +1,8 @@
+HOSTS:
+  fedora-25:
+    roles:
+      - agent
+    platform: fedora-25-x86_64
+    box: bento/fedora-25
+    hypervisor: vagrant
+
