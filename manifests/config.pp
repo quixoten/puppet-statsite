@@ -1,27 +1,28 @@
 # Manage statsite configuration
-class statsite::config inherits statsite {
+class statsite::config {
 
   # Parameters for templates
-  $config_file    = $statsite::config_file
-  $user           = $statsite::user
-  $group          = $statsite::group
-  $manage_user    = $statsite::manage_user
-  $manage_group   = $statsite::manage_group
-  $user_ensure    = $statsite::user_ensure
-  $group_ensure   = $statsite::group_ensure
-  $tcp_port       = $statsite::tcp_port
-  $udp_port       = $statsite::udp_port
-  $bind_address   = $statsite::bind_address
-  $parse_stdin    = $statsite::parse_stdin
-  $log_level      = $statsite::log_level
-  $flush_interval = $statsite::flush_interval
-  $timer_eps      = $statsite::timer_eps
-  $set_eps        = $statsite::set_eps
-  $input_counter  = $statsite::input_counter
-  $daemonize      = $statsite::daemonize
-  $pid_file       = $statsite::pid_file
   $binary_stream  = $statsite::binary_stream
+  $bind_address   = $statsite::bind_address
+  $config_file    = $statsite::config_file
+  $daemonize      = $statsite::daemonize
+  $flush_interval = $statsite::flush_interval
+  $group          = $statsite::group
+  $group_ensure   = $statsite::group_ensure
   $histograms     = $statsite::histograms
+  $input_counter  = $statsite::input_counter
+  $install_path   = $statsite::install_path
+  $log_level      = $statsite::log_level
+  $manage_group   = $statsite::manage_group
+  $manage_user    = $statsite::manage_user
+  $parse_stdin    = $statsite::parse_stdin
+  $pid_file       = $statsite::pid_file
+  $set_eps        = $statsite::set_eps
+  $tcp_port       = $statsite::tcp_port
+  $timer_eps      = $statsite::timer_eps
+  $udp_port       = $statsite::udp_port
+  $user           = $statsite::user
+  $user_ensure    = $statsite::user_ensure
 
   if $manage_group {
     group { $group:
@@ -39,7 +40,7 @@ class statsite::config inherits statsite {
     $stream_cmd = $statsite::stream_cmd
   } else {
     $stream_cmd = join([
-      "python '${statsite::install_path}/current/sinks/graphite.py'",
+      "python '${install_path}/current/sinks/graphite.py'",
       "'${statsite::graphite_host}'",
       $statsite::graphite_port,
       "'${statsite::graphite_prefix}'",
@@ -49,7 +50,7 @@ class statsite::config inherits statsite {
 
   file { $statsite::config_path:
     ensure => directory,
-    mode    => '0644',
+    mode   => '0644',
   }
 
   file { $statsite::config_file:
@@ -58,7 +59,7 @@ class statsite::config inherits statsite {
     mode    => '0644',
   }
 
-  $start_file = $init_style ? {
+  $start_file = $statsite::init_style ? {
     'debian'  => '/etc/init.d/statsite',
     'upstart' => '/etc/init/statsite.conf',
     'systemd' => '/lib/systemd/system/statsite.service',
@@ -66,7 +67,7 @@ class statsite::config inherits statsite {
 
   file { $start_file:
     ensure  => present,
-    content => template("statsite/${init_style}.erb"),
+    content => template("statsite/${statsite::init_style}.erb"),
     mode    => '0755',
   }
 

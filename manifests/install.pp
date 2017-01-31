@@ -1,14 +1,14 @@
 # Install statsite
-class statsite::install inherits statsite {
+class statsite::install {
 
   $package      = "v${statsite::version}.tar.gz"
   $version_path = "${statsite::install_path}/statsite-${statsite::version}"
 
-  ensure_packages($packages)
-  if ($install_proxy) {
-    $curl_options = "--proxy ${install_proxy}"
+  ensure_packages($statsite::packages)
+  if ($statsite::install_proxy) {
+    $curl_options = "--proxy ${statsite::install_proxy}"
   } else {
-    $curl_options = ""
+    $curl_options = ''
   }
 
   $curl_command = "curl -LO ${curl_options} https://github.com/armon/statsite/archive/${package}"
@@ -34,7 +34,7 @@ class statsite::install inherits statsite {
     cwd     => $version_path,
     command => 'make',
     creates => "${version_path}/statsite",
-    require => Package[$packages],
+    require => Package[$statsite::packages],
   }
 
   file { "${statsite::install_path}/current":
