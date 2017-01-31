@@ -1,7 +1,7 @@
 # Manage the statsite service
-class statsite::service inherits statsite {
+class statsite::service {
   service { 'statsite':
     ensure   => running,
-    provider => $init_style,
+    provider => $statsite::init_style,
   }
 }

@@ -1,29 +1,46 @@
 # OS specific parameters
 class statsite::params {
-  case $::osfamily {
+  case $::operatingsystem {
     'Debian' : {
       $packages   = ['scons', 'build-essential']
       $init_style = 'debian'
+      $user       = 'www-data'
+      $group      = 'www-data'
     }
 
-    'Ubuntu' : {
+    'Ubuntu': {
       $packages   = ['scons', 'build-essential']
+      $user       = 'www-data'
+      $group      = 'www-data'
 
       if versioncmp($::operatingsystemrelease, '15.04') >= 0 {
         $init_style = 'systemd'
       } else {
-       $init_style = 'upstart'
+        $init_style = 'upstart'
       }
     }
 
-    'RedHat': {
+    'Fedora': {
       $packages   = ['scons', 'make', 'gcc-c++']
-      if    ($::operatingsystem != 'Fedora' and versioncmp($::operatingsystemrelease, '7') >= 0)
-         or ($::operatingsystem == 'Fedora' and versioncmp($::operatingsystemrelease, '15') >= 0)
-      {
-          $init_style = 'systemd'
+
+      if versioncmp($::operatingsystemrelease, '15') >= 0 {
+        $init_style = 'systemd'
+        $user       = 'root'
+        $group      = 'root'
       } else {
-        fail("${::osfamily} ${::operatingsystemrelease} is not currently supported.")
+        fail("${::operatingsystemrelease} is not currently supported.")
+      }
+    }
+
+    'CentOS': {
+      $packages   = ['scons', 'make', 'gcc-c++']
+
+      if versioncmp($::operatingsystemrelease, '7') >= 0 {
+        $init_style = 'systemd'
+        $user       = 'root'
+        $group      = 'root'
+      } else {
+        fail("${::operatingsystemrelease} is not currently supported.")
       }
     }
 

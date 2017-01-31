@@ -1,0 +1,7 @@
+HOSTS:
+  ubuntu-server-1404-x64:
+    roles:
+      - agent
+    platform: ubuntu-14.04-amd64
+    box: ubuntu/trusty64
+    hypervisor: vagrant

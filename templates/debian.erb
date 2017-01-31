@@ -23,8 +23,8 @@ DAEMON=<%= @install_path %>/current/statsite
 DAEMON_ARGS="-f <%= @config_file %>"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
-DAEMON_USER=www-data
-DAEMON_GROUP=www-data
+DAEMON_USER=<%= @user %>
+DAEMON_GROUP=<%= @group %>
 
 # Exit if the package is not installed
 [ -x "$DAEMON" ] || exit 0

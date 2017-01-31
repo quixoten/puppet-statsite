@@ -1,4 +1,6 @@
-pkg
-Gemfile.lock
-spec/fixtures/
 *.swp
+Gemfile.lock
+junit/
+log/
+pkg
+spec/fixtures/

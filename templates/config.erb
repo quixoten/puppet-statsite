@@ -15,6 +15,7 @@ stream_cmd <%= @install_path %>/current/sinks/graphite.py <%= @graphite_host %> 
 <%- if @input_counter -%>
 input_counter = <%= @input_counter %>
 <%- end -%>
+daemonize = <%= @daemonize %>
 pid_file = <%= @pid_file %>
 binary_stream = <%= @binary_stream %>
 use_type_prefix = <%= @use_type_prefix %>
